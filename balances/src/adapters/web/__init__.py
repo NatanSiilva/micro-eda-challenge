@@ -1,0 +1,1 @@
+from src.adapters.web.server import app

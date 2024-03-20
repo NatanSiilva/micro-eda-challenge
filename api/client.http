@@ -1,0 +1,28 @@
+
+POST http://localhost:8080/clients HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Natan 1",
+    "email": "natan@j.com"
+}
+
+###
+
+POST http://localhost:8080/accounts HTTP/1.1
+Content-Type: application/json
+
+{
+    "client_id": "e45c4ae0-986a-4f9d-82cb-bfa968511495"
+}
+
+###
+
+POST http://localhost:8080/transactions HTTP/1.1
+Content-Type: application/json
+
+{
+    "account_id_from": "68e7431e-d083-46e1-bd0c-1c99c7d6c2d3",
+    "account_id_to": "7d4991af-3d7e-4f99-ab48-3a90251a5fdb",
+    "amount": 5000
+}

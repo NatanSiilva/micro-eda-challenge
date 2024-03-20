@@ -1,0 +1,14 @@
+gunicorn
+fastapi
+python-dotenv
+uvicorn
+pytest
+pytest-mock
+mock
+virtualenv
+pydantic
+python-multipart
+pydantic_settings
+httpx
+sqlmodel
+mysqlclient

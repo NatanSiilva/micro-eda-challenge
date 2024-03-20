@@ -1,0 +1,28 @@
+
+POST http://localhost:3000/clients HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Natandd",
+    "email": "natan@j.com"
+}
+
+###
+
+POST http://localhost:3000/accounts HTTP/1.1
+Content-Type: application/json
+
+{
+    "client_id": "f17ce5a1-01d4-412e-a234-0c9cc8b0cb97"
+}
+
+###
+
+POST http://localhost:8080/transactions HTTP/1.1
+Content-Type: application/json
+
+{
+    "account_id_from": "9f1779fc-4308-46de-8fde-3a573c549748",
+    "account_id_to": "86c69912-ba88-4ba3-963c-8c405327d741",
+    "amount": 11
+}

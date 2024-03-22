@@ -1,1 +1,2 @@
-from src.application.entities.balances import BalancesEntity
+from src.application.entities.balances_entity import BalancesEntity
+from src.application.entities.validator_balances_entity import ValidatorBalances

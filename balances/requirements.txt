@@ -12,3 +12,4 @@ pydantic_settings
 httpx
 sqlmodel
 mysqlclient
+kafka-python

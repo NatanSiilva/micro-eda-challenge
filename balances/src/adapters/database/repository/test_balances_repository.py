@@ -16,48 +16,47 @@ class TestBalancesRepository(unittest.TestCase):
 
         self.account_id = str(uuid4())
         self.balance = 25000
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+
 
         self.balances_entity = BalancesEntity(
             account_id=self.account_id,
             balance=self.balance,
-            created_at=self.created_at,
-            updated_at=self.updated_at
         )
+        
 
     def test_create_balance(self):
-        balance_obj = self.repository.create_balance(
-            self.account_id,
-            self.balance,
-            self.created_at,
-            self.updated_at
-        )
-
+        balance_obj = self.repository.create_balance(entity=self.balances_entity)
         self.assertIsInstance(balance_obj, Balances)
 
-    def test_get_balance_by_id(self):
-        balance_obj = self.repository.create_balance(
-            self.account_id,
-            self.balance,
-            self.created_at,
-            self.updated_at
-        )
+        deleted = self.repository.delete_balance(balance_obj.id)
+        self.assertTrue(deleted)
 
+
+    def test_get_balance_by_id(self):
+        balance_obj = self.repository.create_balance(entity=self.balances_entity)
         retrieved_balance = self.repository.get_balance_by_id(balance_obj.id)
 
         self.assertEqual(balance_obj, retrieved_balance)
 
-    def test_get_all_balances(self):
-        self.repository.create_balance(
-            self.account_id,
-            self.balance,
-            self.created_at,
-            self.updated_at
-        )
+        deleted = self.repository.delete_balance(balance_obj.id)
+        self.assertTrue(deleted)
 
+
+    def test_get_all_balances(self):
+        self.repository.create_balance(entity=self.balances_entity)
         balances = self.repository.get_all_balances()
 
         self.assertIsInstance(balances, List)
         self.assertTrue(all(isinstance(balance, Balances) for balance in balances))
 
+        for b in balances:
+            deleted = self.repository.delete_balance(b.id)
+            self.assertTrue(deleted)
+
+
+    def test_delete(self):
+        entity = self.repository.create_balance(entity=self.balances_entity)
+
+        result = self.repository.delete_balance(entity.id)
+
+        self.assertTrue(result)

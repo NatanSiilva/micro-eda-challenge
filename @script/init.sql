@@ -15,21 +15,21 @@ DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS clients;
 
 CREATE TABLE IF NOT EXISTS clients (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255),
     name VARCHAR(255),
     email VARCHAR(255),
     created_at DATE
 );
 
 CREATE TABLE IF NOT EXISTS accounts (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255),
     client_id VARCHAR(255),
     balance INT,
     created_at DATE
 );
 
 CREATE TABLE IF NOT EXISTS transactions (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255),
     account_id_from VARCHAR(255),
     account_id_to VARCHAR(255),
     amount INT,

@@ -3,7 +3,7 @@ import unittest
 from datetime import datetime
 from uuid import uuid4
 
-from src.application.shared import BaseEntity
+from src.application.shared.entities import BaseEntity
 
 
 class TestBaseEntity(unittest.TestCase):

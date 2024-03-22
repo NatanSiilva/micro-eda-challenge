@@ -1,3 +1,4 @@
 .history
 .docker
 .pytest_cache
+.vscode

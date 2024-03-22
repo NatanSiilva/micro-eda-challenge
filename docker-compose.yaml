@@ -11,6 +11,8 @@ services:
     command: [ "go", "run", "cmd/walletcore/main.go" ]
     depends_on:
       - mysql
+    networks:
+      - microservice-network
   
   micro-balances:
     build: balances
@@ -24,6 +26,8 @@ services:
       - ./balances/.env
     depends_on:
       - mysql
+    networks:
+      - microservice-network
     
   mysql:
     image: mysql:5.7
@@ -38,6 +42,8 @@ services:
     volumes:
       - .docker/mysql:/var/lib/mysql
       - ./@script/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - microservice-network
 
   zookeeper:
     image: "confluentinc/cp-zookeeper:6.1.0"
@@ -48,6 +54,8 @@ services:
       TZ: Sao_Paulo/Brazil
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - microservice-network
 
   kafka:
     image: "confluentinc/cp-enterprise-kafka:6.1.0"
@@ -72,6 +80,9 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
       CONFLUENT_METRICS_ENABLE: 'false'
+    networks:
+      - microservice-network
+      
 
   control-center:
     image: confluentinc/cp-enterprise-control-center:7.3.0
@@ -88,4 +99,10 @@ services:
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
-  
+    networks:
+      - microservice-network
+
+
+networks:
+  microservice-network:
+    driver: bridge

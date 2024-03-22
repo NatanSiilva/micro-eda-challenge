@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     DATABASE_NAME: str = Field(..., env="DATABASE_NAME")
     DATABASE_PASSWORD: str = Field(..., env="DATABASE_PASSWORD")
     DATABASE_USERNAME: str = Field(..., env="DATABASE_USERNAME")
+    KAFKA_INSTANCE: str = Field(..., env="KAFKA_INSTANCE")
+    KAFKA_TOPIC_NAME: str = Field(..., env="KAFKA_TOPIC_NAME")
 
     @property
     def DATABASE_URL(self) -> str:

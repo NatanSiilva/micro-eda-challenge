@@ -13,3 +13,7 @@ httpx
 sqlmodel
 mysqlclient
 kafka-python
+aiokafka
+kafka
+pykafka
+pytest-asyncio

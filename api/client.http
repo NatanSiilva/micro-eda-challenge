@@ -24,10 +24,10 @@ Content-Type: application/json
 {
     "account_id_from": "9a9d550f-c475-4bad-a034-cfd3dbdb6813",
     "account_id_to": "092ce768-68e5-448f-8747-b0b149b01131",
-    "amount": 230
+    "amount": 60
 }
 
 
 ###
 
-GET http://localhost:8000/balances/092ce768-68e5-448f-8747-b0b149b01131 HTTP/1.1
+GET http://localhost:3003/balances/092ce768-68e5-448f-8747-b0b149b01131 HTTP/1.1

@@ -20,7 +20,7 @@ services:
     volumes:
       - ./balances:/app
     ports:
-      - "8000:8000"
+      - "3003:3003"
     restart: always
     env_file:
       - ./balances/.env

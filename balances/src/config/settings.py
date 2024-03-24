@@ -2,18 +2,12 @@ from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
-
-from pydantic import Field
-from pydantic_settings import BaseSettings
-
-
-
 class Settings(BaseSettings):
     DATABASE_HOST: str = Field(..., env="DATABASE_HOST")
     DATABASE_NAME: str = Field(..., env="DATABASE_NAME")
     DATABASE_PASSWORD: str = Field(..., env="DATABASE_PASSWORD")
     DATABASE_USERNAME: str = Field(..., env="DATABASE_USERNAME")
-    KAFKA_INSTANCE: str = Field(..., env="KAFKA_INSTANCE")
+    KAFKA_BOOTSTRAP_SERVERS: str = Field(..., env="KAFKA_BOOTSTRAP_SERVERS")
     KAFKA_TOPIC_NAME: str = Field(..., env="KAFKA_TOPIC_NAME")
 
     @property

@@ -1,1 +1,1 @@
-from src.pkg.kafka.kafka_event import Event
+from src.pkg.kafka.kafka_consumer import KafkaConsumer

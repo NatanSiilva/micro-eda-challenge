@@ -1,113 +1,35 @@
-import asyncio
-import json
-import pytest
-
-from aiokafka import AIOKafkaConsumer
-
-
-# KAFKA_INSTANCE = "kafka:29092"
-
-
-# @pytest.mark.asyncio
-# async def test_kafka_consumer():
-#     consumer = AIOKafkaConsumer(
-#                         "balances", 
-#                         bootstrap_servers=KAFKA_INSTANCE, 
-#                         enable_auto_commit=True,       # Is True by default anyway
-#                         auto_commit_interval_ms=1000,  # Autocommit every second
-#                         auto_offset_reset="earliest",
-#                     )
-#     await consumer.start()
-#     try:
-#         async for msg in consumer:
-#             assert isinstance(msg.value, bytes)
-#             data = json.loads(msg.value.decode())
-    
-#             print("Received message:", data)
-#             assert "campo_esperado" in data
-#     finally:
-#         await consumer.stop()
-
-
-
-
-
-
-import json
 import unittest
-
-from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
-
-from src.config.settings import settings
-
-
-KAFKA_INSTANCE = settings.KAFKA_INSTANCE
+import asyncio
+from src.pkg.kafka.kafka_consumer import KafkaConsumer
 
 
 class TestKafkaConsumer(unittest.TestCase):
-    async def consume_messages(self):
-        consumer = AIOKafkaConsumer(
-                        "balances", 
-                        bootstrap_servers=KAFKA_INSTANCE, 
-                        enable_auto_commit=True,       
-                        auto_commit_interval_ms=1000,
-                        auto_offset_reset="earliest",
-                    )
-        
-        await consumer.start()
+    async def test_kafka_consumer_register(self):
+        async with KafkaConsumer("balances") as consumer:
+            consumer.register("observer")
+            self.assertEqual(consumer.get_observers(), ["observer"])
 
-        try:
-            async for msg in consumer:
-                assert isinstance(msg.value, bytes)
-                data = json.loads(msg.value.decode())
-                print("Received message ========:", data)
-                return data
-        
-        finally:
+    async def test_kafka_consumer_unregister(self):
+        async with KafkaConsumer("balances") as consumer:
+            consumer.register("observer")
+            consumer.unregister("observer")
+            self.assertEqual(consumer.get_observers(), [])
+
+    async def test_kafka_consumer_notify_observers(self):
+        async with KafkaConsumer("balances") as consumer:
+            consumer.register("observer")
+            self.assertEqual(consumer.notifyObservers(), None)
+
+    async def test_kafka_consumer_start(self):
+        async with KafkaConsumer("balances") as consumer:
+            await consumer.start()
+            self.assertTrue(consumer.consumer.is_active)
+
+    async def test_kafka_consumer_stop(self):
+        async with KafkaConsumer("balances") as consumer:
+            await consumer.start()
             await consumer.stop()
+            self.assertFalse(consumer.consumer.is_active)
 
-
-    async def produce_messages(self):
-        producer =  AIOKafkaProducer(bootstrap_servers=KAFKA_INSTANCE)
-
-        await producer.start()
-
-        try:
-            
-            messages = [
-                {
-                    "Name": "BalanceUpdated", 
-                    "Payload": {
-                        "account_id_from": "9a9d550f-c475-4bad-a034-cfd3dbdb6813",
-                        "account_id_to": "092ce768-68e5-448f-8747-b0b149b01131",
-                        "balance_account_id_from": 24950,
-                        "balance_account_id_to": 550
-                        }
-                },
-                {
-                    "Name": "BalanceUpdated", 
-                    "Payload": {
-                        "account_id_from": "9a9d550f-c475-4bad-a034-cfd3dbdb6813",
-                        "account_id_to": "092ce768-68e5-448f-8747-b0b149b01131",
-                        "balance_account_id_from": 24900,
-                        "balance_account_id_to": 600
-                    }
-                }
-            ]
-
-            for message in messages:
-                await producer.send_and_wait("balances", json.dumps(message).encode())
-                return message
-            
-            
-        finally:
-            await producer.stop()
-
-    
-    def test_consumer(self):
-        loop = asyncio.get_event_loop()
-        message = loop.run_until_complete(self.consume_messages())
-        self.assertIsNotNone(message)
-
-    def test_producer(self):
-        self.assertIsNotNone(self.produce_messages())
+if __name__ == "__main__":
+    unittest.main()

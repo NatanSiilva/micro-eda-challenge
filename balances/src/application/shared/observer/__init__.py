@@ -1,0 +1,1 @@
+from src.application.shared.observer.observer_interface import Observer, Subject

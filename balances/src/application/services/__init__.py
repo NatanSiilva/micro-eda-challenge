@@ -1,0 +1,1 @@
+from src.application.services.save_balances_service import SaveBalancesServiceObserver

@@ -6,9 +6,6 @@ CREATE TABLE IF NOT EXISTS balances (
     updated_at DATE
 );
 
-INSERT INTO balances (id, account_id, balance, created_at) VALUES ('1', '9a9d550f-c475-4bad-a034-cfd3dbdb6813', 1000, '2023-10-06');
-INSERT INTO balances (id, account_id, balance, created_at) VALUES ('2', '092ce768-68e5-448f-8747-b0b149b01131', 500, '2023-10-06');
-
 
 DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS accounts;
@@ -39,5 +36,5 @@ CREATE TABLE IF NOT EXISTS transactions (
 INSERT INTO clients (id, name, email, created_at) VALUES ('323ae4f9-4e7b-490a-92e5-d1dcb27cac07', 'John Doe', 'johndoe@example.com', '2023-10-06');
 INSERT INTO clients (id, name, email, created_at) VALUES ('f46bb0a4-403a-466e-8ec1-8c2e3502d38c', 'Jane Doe', 'janedoe@example.com', '2023-10-06');
 
-INSERT INTO accounts (id, client_id, balance, created_at) VALUES ('9a9d550f-c475-4bad-a034-cfd3dbdb6813', '323ae4f9-4e7b-490a-92e5-d1dcb27cac07', 25000, '2023-10-06');
-INSERT INTO accounts (id, client_id, balance, created_at) VALUES ('092ce768-68e5-448f-8747-b0b149b01131', 'f46bb0a4-403a-466e-8ec1-8c2e3502d38c', 500, '2023-10-06');
+INSERT INTO accounts (id, client_id, balance, created_at) VALUES ('9a9d550f-c475-4bad-a034-cfd3dbdb6813', '323ae4f9-4e7b-490a-92e5-d1dcb27cac07', 27000, '2023-10-06');
+INSERT INTO accounts (id, client_id, balance, created_at) VALUES ('092ce768-68e5-448f-8747-b0b149b01131', 'f46bb0a4-403a-466e-8ec1-8c2e3502d38c', 10, '2023-10-06');

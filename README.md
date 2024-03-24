@@ -58,7 +58,7 @@
 
   <p>Ao abrir os tópicos no control-center, nos selects colocar as opções "Jump to offset" e no segundo "0". Vai aparecer os itens na fila do kafka</p>
 
-  <p> No topo projeto temos uma pequena documentação com as rotas disponíveis dos microservices.
+  <p> No topo projeto temos uma pasta chamada "api" uma pequena documentação com as rotas disponíveis dos microservices.
   </p>
   
   <h6> OBS: O Banco de Dados é inicializado com uma pré-carga que é carregado na execução do docker-compose.

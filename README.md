@@ -1,7 +1,6 @@
 <h1 align="center">EDA Challenge</h1>
 
-<p align="center">Esse projeto é um desafio para conclusão e certificação do módulo EDA do curso full Cycle.
-    O intuito do projeto é compreender a arquitetura orientada a eventos entre microservices.
+<p align="center">Este projeto é um desafio para a conclusão e certificação do módulo EDA do curso Full Cycle. O objetivo do projeto é compreender a arquitetura orientada a eventos entre microsserviços.
  </p>
 
 </br></br>
